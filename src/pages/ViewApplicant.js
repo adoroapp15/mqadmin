@@ -62,6 +62,10 @@ function ViewApplicant() {
   
       if (response.status === 200) {
         console.log("Data saved successfully");
+        await axios.post(`${config.API_URL}/app/user/send`, {
+          title:`Result is Out`,
+          body:`Contest Result is Out.`
+        });
       }
     } catch (error) {
       console.error("Error saving data:", error);

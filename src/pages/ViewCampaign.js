@@ -64,6 +64,10 @@ function ViewCampaign() {
   
       if (response.status === 200) {
         console.log("Data saved successfully");
+        await axios.post(`${config.API_URL}/app/user/send`, {
+          title:`Result is Out`,
+          body:`Campaign Result is Out.`
+        });
       }
     } catch (error) {
       console.error("Error saving data:", error);
