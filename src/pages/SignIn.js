@@ -56,7 +56,7 @@ const SignIn = () => {
                                 
                             }}
                             onSubmit={async (values) => {
-                                console.log(values,"hittting")
+                               
                                 axios.post(`${config.API_URL}/admin/login`, values).then(res => {
                                     if(res.status === 200){
                                        

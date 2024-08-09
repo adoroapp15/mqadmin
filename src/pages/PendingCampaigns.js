@@ -10,15 +10,15 @@ import axios from 'axios';
 import { config } from '../components/Constant';
 
 const ModalC = ({ campaignDetail, show, handleClose }) => {
-    const [action, setAction] = useState('');
+   // const [action, setAction] = useState('');
 
     const handleButtonClick = async (buttonName) => {
-        setAction(buttonName);
-        console.log("action is",action)
-        await handleSubmit();
+       // setAction(buttonName);
+       // console.log("action is",action)
+        await handleSubmit(buttonName);
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (action) => {
         
         try {
             const response = await axios.put(`${config.API_URL}/admin/action/${action}`, {'Id': campaignDetail.Id});
@@ -86,19 +86,7 @@ const ModalC = ({ campaignDetail, show, handleClose }) => {
 }
 
 const Campaign = ({status}) => {
-    console.log('HEYYYY')
-//     let  allCampaign = useSelector(state => state.campaign.allCampaign);
-//     let  pendingCampaign = useSelector(state => state.campaign.pendingCampaign)
-//     // let  pendingCampaign = useSelector(state => state.campaign.pendingCampaign)
-//     let data
-//    if(status === "all" || status === undefined){
-//         data = allCampaign
-//    }else if (status === "pending"){
-//     data = pendingCampaign
-//    }else if (status === "completed") {
-//     data = []
-//    }
-   console.log('OYYYYYYy')
+
     const [campaignDetail, setCampaignDetail] = useState({})
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
@@ -109,11 +97,9 @@ const Campaign = ({status}) => {
         setShow(false)
     }
     useEffect(() => {
-        console.log(1223)
         const fetchData = async () => {
             try {
                 const user =sessionStorage.getItem('User')
-                console.log("user",user)
                 const res = await axios.get(`${config.API_URL}/brand/campaign`);
                 // setData(res.data.data)
              const total=res.data.data
@@ -126,8 +112,6 @@ const Campaign = ({status}) => {
                 }
              })
              setData(pending)
-console.log(data,"FRSEGFDe")
-                console.log("Done", data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -167,15 +151,7 @@ console.log(data,"FRSEGFDe")
             </Row>
         </Col>
         </>
-        // <div className="campaign-table">
-        //     <BootstrapTable
-        //         bootstrap4
-        //         keyField="id"
-        //         data={data !== undefined && (status != undefined ? data.pendingCampaign : data.allCampaign)}
-        //         columns={columns}
-        //         pagination={paginationFactory({ sizePerPage: 5 })}
-        //     />
-        // </div>
+       
     )
 }
 

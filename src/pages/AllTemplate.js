@@ -22,7 +22,6 @@ function AllTemplate() {
         `${config.API_URL}/app/user/alltemplates`
       );
       if (response.status == 200) {
-        console.log("response iss", response.data);
         setData(response.data.templates);
       }
     } catch (error) {

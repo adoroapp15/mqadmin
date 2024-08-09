@@ -52,9 +52,9 @@ const CreateContest = ({ status, handleClose, action, data }) => {
     };
 
     try {
-      console.log('formmmmmmm dataaaaa',formData)
+  
       if (action === 'Create') {
-        console.log('creatinggggggggg')
+       
         await axios.post(`${config.API_URL}/app/user/createcontest`, formData, configr);
         await axios.post(`${config.API_URL}/app/user/send`, {
           title:`Contest is Live`,
@@ -62,7 +62,7 @@ const CreateContest = ({ status, handleClose, action, data }) => {
         });
         alert('Contest Created Successfully');
       } else {
-        console.log('updattttttinggggggg')
+       
         const response = await axios.put(`${config.API_URL}/app/user/updatecontest/${data.Id}`, formData, configr);
        if (response.status==200){
 

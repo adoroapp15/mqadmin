@@ -17,8 +17,7 @@ function AllPost() {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${config.API_URL}/app/user/allpost`);
-      // Adjust the endpoint as per your backend API
-      console.log(response.data, "response iss");
+     
       setData(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -27,12 +26,11 @@ function AllPost() {
 
   const handleStatusReject = async (id, status) => {
     try {
-      console.log('hit de;ete')
       const re = await axios.delete(`${config.API_URL}/app/user/rejectpost`, {
         params: { Id: id },
       }); 
 
-      console.log('resof delte iss',re)
+    
       if (re.status == 200) {
         setData(data.filter((item) => item.Id !== id));
       } else {

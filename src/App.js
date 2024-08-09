@@ -22,6 +22,9 @@ import AllTemplate from "./pages/AllTemplate";
 import User from "./pages/User";
 import ViewCampaign from "./pages/ViewCampaign";
 import AllSupport from "./pages/AllSupport";
+import Blog from "./pages/AllBlog";
+import CaseStudy from "./pages/AllCase";
+
 function App() {
   const state = useSelector((state) => state);
   const loggedIn = useSelector((state) => state.loggedIn);
@@ -76,6 +79,9 @@ function App() {
             <Route path="all-template" element={<AllTemplate />} />
             <Route path="all-user" element={<User />} />
             <Route path="all-support" element={<AllSupport/>} />
+            <Route path="all-blogs" element={<Blog/>} />
+            <Route path="all-casestudy" element={<CaseStudy/>} />
+            
             
           </Route>
         </Routes>

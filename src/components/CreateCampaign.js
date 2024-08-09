@@ -38,15 +38,14 @@ const CreateCampaign = ({ status, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("formdata");
+   
     if (!saveType) {
-      console.error("Please select Blog or Case Study");
       return;
     }
     const configr = {
       headers: { "content-type": "multipart/form-data" },
     };
-    console.log(formData);
+ 
     try {
       await axios
         .post(`${config.API_URL}/admin/save/${saveType}`, formData, configr)
@@ -56,10 +55,10 @@ const CreateCampaign = ({ status, handleClose }) => {
           handleClose();
         })
         .catch((err) => {
-          console.log(err);
+          
         });
     } catch (error) {
-      console.error("Error sending data:", error);
+     
     }
   };
 

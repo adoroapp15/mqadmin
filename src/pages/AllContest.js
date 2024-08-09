@@ -54,16 +54,13 @@ const AllContest = ({ status }) => {
     setShow(false);
   };
   useEffect(() => {
-    console.log(1223);
     const fetchData = async () => {
       try {
         const user = sessionStorage.getItem("User");
-        console.log("user", user);
         const res = await axios.get(`${config.API_URL}/app/user/getallcontest`);
         setData(res.data.contest);
-        console.log("response staa issssss", res.data);
+       
 
-        console.log("Done", data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

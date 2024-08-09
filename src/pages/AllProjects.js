@@ -75,7 +75,7 @@ const handlecomplete = async (Id) => {
 };
 
 const ProjectItem = ({ campaign, onClickView }) => {
-  console.log("project");
+ 
   return (
     <Row>
       <Col md={6}>
@@ -132,7 +132,7 @@ const AllProjects = () => {
         const res = await axios.get(`${config.API_URL}/brand/campaign`);
         setCampaignData(res.data.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+       
       }
     };
 

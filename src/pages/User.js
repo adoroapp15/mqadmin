@@ -17,7 +17,7 @@ function User() {
     try {
       const response = await axios.get(`${config.API_URL}/app/user/user`);
       if (response.status === 200){
-        console.log("response is", response.data);
+       
         setData(response.data.templates);
       }
     } catch (error) {
@@ -31,7 +31,7 @@ function User() {
         data: data.map(item => ({ userName: item.userName, contestName: item.contestName, rank: item.rank }))
       });
       if (response.status === 200) {
-        console.log("Data saved successfully");
+       
       }
     } catch (error) {
       console.error("Error saving data:", error);

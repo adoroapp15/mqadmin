@@ -14,7 +14,6 @@ function AllSupport() {
     try {
       const response = await axios.get(`${config.API_URL}/app/user/support`);
       if (response.status === 200) {
-        console.log("response is", response.data);
         setData(response.data.queries.map(item => ({ ...item, response: '' }))); // Initialize response field
       }
     } catch (error) {
@@ -28,7 +27,6 @@ function AllSupport() {
         data: data.map(item => ({ userName: item.userName, contestName: item.contestName, rank: item.rank }))
       });
       if (response.status === 200) {
-        console.log("Data saved successfully");
       }
     } catch (error) {
       console.error("Error saving data:", error);
@@ -42,14 +40,13 @@ function AllSupport() {
   };
 
   const sendResponse = async (email, response) => {
-    console.log('email and response isssssss',email,response)
     try {
       const res = await axios.post(`${config.API_URL}/app/user/sendresponse`, {
         email,
         response
       });
       if (res.status === 200) {
-        console.log("Response sent successfully");
+       
       }
     } catch (error) {
       console.error("Error sending response:", error);

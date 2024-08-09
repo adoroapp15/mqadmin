@@ -70,11 +70,10 @@ const Campaigns = ({status}) => {
         setShow(false)
     }
     useEffect(() => {
-        console.log(1223)
         const fetchData = async () => {
             try {
                 const user =sessionStorage.getItem('User')
-                console.log("user",user)
+           
                 const res = await axios.get(`${config.API_URL}/brand/campaign`);
                 setData(res.data.data)
              

@@ -19,12 +19,10 @@ function ViewCampaign() {
   }, []);
 
   const fetchData = async () => {
-    console.log('ID is', Id);
     try {
       const response = await axios.get(`${config.API_URL}/app/user/getBrandCampaign`, {
         params: { Id }
       });
-      console.log("response is", response.data.campaigndetails);
       setData(response.data.campaigndetails);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -47,7 +45,6 @@ function ViewCampaign() {
   
       const Name = datamil[0]?.contestName || ''; // Use optional chaining to avoid errors if datamil is empty
   
-      console.log('body', datamil[0], datamil);
   
       // Construct the body object with a dynamic key in the data object
       const body = {
@@ -58,12 +55,11 @@ function ViewCampaign() {
         }
       };
   
-      console.log('body for saving', body);
   
       const response = await axios.post(`${config.API_URL}/app/user/saveresult`, body);
   
       if (response.status === 200) {
-        console.log("Data saved successfully");
+      
         await axios.post(`${config.API_URL}/app/user/send`, {
           title:`Result is Out`,
           body:`Campaign Result is Out.`
