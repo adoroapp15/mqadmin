@@ -14,8 +14,8 @@ function Blog() {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true)
-  const [edit,setEdit]=useState({})
+  const handleShow = () => setShow(true);
+  const [edit, setEdit] = useState({});
 
   // Fetch data from backend when the component mounts
   useEffect(() => {
@@ -24,12 +24,9 @@ function Blog() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${config.API_URL}/admin/getBlog`
-      );
-      if (response.status == 200) 
-        {
-            console.log('responseeeeeeeeeee',response)
+      const response = await axios.get(`${config.API_URL}/admin/getBlog`);
+      if (response.status == 200) {
+        console.log("responseeeeeeeeeee", response);
         setData(response.data.data);
       }
     } catch (error) {
@@ -38,12 +35,12 @@ function Blog() {
   };
 
   const handleStatus = async (data) => {
-    setEdit(data)
-    handleShow(true)
+    setEdit(data);
+    handleShow(true);
     // try {
     //   const re = await axios.post(`${config.API_URL}/app/user/${status}`, {
     //     Id: id,
-    //   }); 
+    //   });
     //   if (re.status == 200) {
     //     setData(data.filter((item) => item.Id !== id));
     //   } else {
@@ -56,7 +53,7 @@ function Blog() {
 
   return (
     <div>
-     <Edit status={show} handleClose={handleClose} type={"Blog"} data={edit}/>
+      <Edit status={show} handleClose={handleClose} type={"Blog"} data={edit} />
       <h1>Blog</h1>
       {/* <button onClick={handleBulkStatusUpdate}>Change Status of All</button> */}
       <table className="table table-hover">
@@ -64,7 +61,7 @@ function Blog() {
           <tr>
             <th>Sr No</th>
             <th>Header</th>
-            
+
             <th>Action</th>
           </tr>
         </thead>
@@ -84,8 +81,6 @@ function Blog() {
                     {data.Header}
                   </div>
                 </td>
-
-             
 
                 <td>
                   <a
@@ -108,7 +103,6 @@ function Blog() {
                     <i className="fa fa-trash" aria-hidden="true"></i>
                   </a> */}
                 </td>
-               
               </tr>
             );
           })}

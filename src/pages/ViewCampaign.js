@@ -12,8 +12,7 @@ function ViewCampaign() {
   const Id = decodeURIComponent(rawId);
   
   const [data, setData] = useState([]);
-
-  // Fetch data from backend when the component mounts
+  
   useEffect(() => {
     fetchData();
   }, []);
@@ -39,12 +38,13 @@ function ViewCampaign() {
   
       const datamil = sortedData.map(item => ({
         userName: item.userName,
-        contestName: item.contestName,
-        rank: item.rank
+        contestName: item.campaign_name,
+        rank: item.rank,
+        mobileNo:item.mobileNo
       }));
   
       const Name = datamil[0]?.contestName || ''; // Use optional chaining to avoid errors if datamil is empty
-  
+    
   
       // Construct the body object with a dynamic key in the data object
       const body = {

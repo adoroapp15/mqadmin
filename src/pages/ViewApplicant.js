@@ -5,8 +5,6 @@ import { config } from "../components/Constant";
 
 function ViewApplicant() {
   const location = useLocation();
-
-  // Parse the query parameters
   const queryParams = new URLSearchParams(location.search);
   const Id = queryParams.get('Id');
   const [data, setData] = useState([]);
@@ -30,7 +28,8 @@ function ViewApplicant() {
 
   const saveData = async () => {
     try {
-      // Sort the data by rank (ascending) and select the top 5
+
+      
       const sortedData = data
         .filter(item => item.rank !== undefined && item.rank !== '')
         .sort((a, b) => a.rank - b.rank)
@@ -39,10 +38,11 @@ function ViewApplicant() {
       const datamil = sortedData.map(item => ({
         userName: item.userName,
         contestName: item.contestName,
-        rank: item.rank
+        rank: item.rank,
+        mobileNo:item.mobileNo
       }));
   
-      const Name = datamil[0]?.contestName || ''; // Use optional chaining to avoid errors if datamil is empty
+      const Name = datamil[0]?.contestName || ''; 
   
       const body = {
         campaign: 0,
