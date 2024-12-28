@@ -95,12 +95,12 @@ function AllPost() {
                 
                 <td>
                   <a
-                    href={`https://www.adoro.social/UserPost/${data.fileName}`}
+                    href={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/UserPost/${data.fileName}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <img
-                      src={`https://www.adoro.social/UserPost/${data.fileName}`}
+                      src={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/UserPost/${data.fileName}`}
                       alt="Description"
                       style={{ height: 100, width: 100 }}
                     />

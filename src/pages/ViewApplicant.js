@@ -6,7 +6,7 @@ import { config } from "../components/Constant";
 function ViewApplicant() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const Id = queryParams.get('Id');
+  const Id = queryParams.get("Id");
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -15,9 +15,12 @@ function ViewApplicant() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${config.API_URL}/app/user/contestapplicants`, {
-        params: { Id }
-      });
+      const response = await axios.get(
+        `${config.API_URL}/app/user/contestapplicants`,
+        {
+          params: { Id },
+        }
+      );
       if (response.status === 200) {
         setData(response.data.applicants);
       }
@@ -28,44 +31,44 @@ function ViewApplicant() {
 
   const saveData = async () => {
     try {
-
-      
       const sortedData = data
-        .filter(item => item.rank !== undefined && item.rank !== '')
+        .filter((item) => item.rank !== undefined && item.rank !== "")
         .sort((a, b) => a.rank - b.rank)
         .slice(0, 5);
-  
-      const datamil = sortedData.map(item => ({
+
+      const datamil = sortedData.map((item) => ({
         userName: item.userName,
         contestName: item.contestName,
         rank: item.rank,
-        mobileNo:item.mobileNo
+        mobileNo: item.mobileNo,
       }));
-  
-      const Name = datamil[0]?.contestName || ''; 
-  
+
+      const Name = datamil[0]?.contestName || "";
+
       const body = {
         campaign: 0,
         Name: Name,
         data: {
-         "Array": datamil
-        }
+          Array: datamil,
+        },
       };
-  
-  
-      const response = await axios.post(`${config.API_URL}/app/user/saveresult`, body);
-  
+
+      const response = await axios.post(
+        `${config.API_URL}/app/user/saveresult`,
+        body
+      );
+
       if (response.status === 200) {
-        await axios.post(`${config.API_URL}/app/user/send`, {
-          title:`Result is Out`,
-          body:`Contest Result is Out.`
-        });
+        // await axios.post(`${config.API_URL}/app/user/send`, {
+        //   title:`Result is Out`,
+        //   body:`Contest Result is Out.`
+        // });
+        alert("Result is Saved");
       }
     } catch (error) {
       console.error("Error saving data:", error);
     }
   };
-  
 
   return (
     <div>
@@ -85,14 +88,22 @@ function ViewApplicant() {
               <td>{index + 1}</td>
               <td>{item.userName}</td>
               <td>
-                <a href={`https://www.adoro.social/ContestApply/${item.fileName}`} target="_blank" rel="noopener noreferrer">
-                  <img src={`https://www.adoro.social/ContestApply/${item.fileName}`} alt="Description" style={{ height: 100, width: 100 }} />
+                <a
+                  href={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/ContestApply/${item.fileName}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/ContestApply/${item.fileName}`}
+                    alt="Description"
+                    style={{ height: 100, width: 100 }}
+                  />
                 </a>
               </td>
               <td>
                 <input
                   type="number"
-                  value={item.rank || ''}
+                  value={item.rank || ""}
                   onChange={(e) => {
                     const newData = [...data];
                     newData[index].rank = parseInt(e.target.value, 10);
@@ -111,7 +122,9 @@ function ViewApplicant() {
           marginBottom: "10px",
         }}
       >
-        <button className="custom-btn" onClick={saveData}>Save</button>
+        <button className="custom-btn" onClick={saveData}>
+          Save
+        </button>
       </div>
     </div>
   );

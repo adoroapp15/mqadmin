@@ -1,6 +1,7 @@
 // Constants.js
 const prod = {
-  API_URL: "https://backend-seven-gules.vercel.app",
+  //API_URL: "https://wallet-eight-pied.vercel.app",
+  API_URL: "https://api.adoro.social",
 };
 
 const dev = {

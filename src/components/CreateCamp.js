@@ -30,28 +30,54 @@ const Campaign = ({ show, handleClose, action = "Create", data }) => {
 
   const dispatch = useDispatch();
 
-  const initialValues =
-    action === "Create"
-      ? {
-          brand_name: "",
-          campaign_name: "",
-          logo: null,
-          time_limit: "",
-          brand_guidlines: "",
-          static_meme: "",
-          video_meme: "",
-          gif: "",
-        }
-      : {
-          brand_name: data.brand_name || "",
-          campaign_name: data.campaign_name || "",
-          logo: null,
-          time_limit: data.time_limit || "",
-          brand_guidlines: data.brand_guidlines || "",
-          static_meme: data.static_meme || "",
-          video_meme: data.video_meme || "",
-          gif: data.gif || "",
-        };
+  // const initialValues =
+  //   action === "Create"
+  //     ? {
+  //         brand_name: "",
+  //         campaign_name: "",
+  //         logo: null,
+  //         time_limit: "",
+  //         brand_guidlines: "",
+  //         static_meme: "",
+  //         video_meme: "",
+  //         gif: "",
+  //       }
+  //     : {
+  //         brand_name: data.brand_name || "",
+  //         campaign_name: data.campaign_name || "",
+  //         logo: null,
+  //         time_limit: data.time_limit || "",
+  //         brand_guidlines: data.brand_guidlines || "",
+  //         static_meme: data.static_meme || "",
+  //         video_meme: data.video_meme || "",
+  //         gif: data.gif || "",
+  //       };
+
+        const initialValues =
+  action === "Create"
+    ? {
+        brand_name: "",
+        campaign_name: "",
+        logo: null,
+        time_limit: "",
+        brand_guidlines: "",
+        static_meme: "",
+        video_meme: "",
+        gif: "",
+        amt: "", // Added here
+      }
+    : {
+        brand_name: data.brand_name || "",
+        campaign_name: data.campaign_name || "",
+        logo: null,
+        time_limit: data.time_limit || "",
+        brand_guidlines: data.brand_guidlines || "",
+        static_meme: data.static_meme || "",
+        video_meme: data.video_meme || "",
+        gif: data.gif || "",
+        amt: data.amt || "", // Added here
+      };
+
 
   return (
     <>
@@ -76,7 +102,8 @@ const Campaign = ({ show, handleClose, action = "Create", data }) => {
               formData.append("video_meme", values.video_meme);
               formData.append("gif", values.gif);
               formData.append("email", "info@marqueberry.com");
-              formData.append("status","Accepted")
+              formData.append("status", "Accepted");
+              formData.append("amt", values.amt);
 
               const configr = {
                 headers: { "content-type": "multipart/form-data" },
@@ -194,6 +221,15 @@ const Campaign = ({ show, handleClose, action = "Create", data }) => {
                   min="1"
                   required
                   value={values.time_limit}
+                />
+
+                <Field
+                  name="amt"
+                  placeholder="Amount(Rs)"
+                  type="number"
+                  min="1"
+                  required
+                  value={values.amt}
                 />
                 <button type="submit" className="custom-btn">
                   {action === "Create" ? "Submit" : "Update"}

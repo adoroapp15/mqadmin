@@ -30,8 +30,7 @@ function User() {
             userName: item.userName,
             contestName: item.contestName,
             rank: item.rank,
-            mobileNo:item.mobileNo
-            
+            mobileNo: item.mobileNo,
           })),
         }
       );
@@ -66,7 +65,9 @@ function User() {
                 <td>{index + 1}</td>
                 <td>{item.userName}</td>
                 {/* <td>
-                <Link to={`https://www.adoro.social/ContestApply/${item.fileName}`}>
+                <Link to={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com
+ 
+ /ContestApply/${item.fileName}`}>
                   {item.type}
                 </Link>
               </td>

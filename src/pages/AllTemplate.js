@@ -85,14 +85,14 @@ function AllTemplate() {
                 <td> {data.category} </td>
                 <td>
                   <a
-                    href={`https://www.adoro.social/UserTemplate/${data.fileName}`}
+                    href={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/UserTemplate/${data.fileName}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <img
-                      src={`https://www.adoro.social/UserTemplate/${data.fileName}`}
+                      src={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/UserTemplate/${data.fileName}`}
                       alt="Description"
-                      style={{ height: 100, width: 100}}
+                      style={{ height: 100, width: 100 }}
                     />
                   </a>
                 </td>
@@ -135,7 +135,9 @@ function AllTemplate() {
                 <td>
                   {" "}
                   <Link
-                    to={`https://www.adoro.social/UserPost/${data.fileName}`}
+                    to={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com
+ 
+ /UserPost/${data.fileName}`}
                   >
                     {data.type}
                   </Link>{" "}

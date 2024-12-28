@@ -5,23 +5,24 @@ import { config } from "../components/Constant";
 
 function ViewCampaign() {
   const location = useLocation();
-
-  // Parse the query parameters
   const queryParams = new URLSearchParams(location.search);
-  const rawId = queryParams.get('Id');
+  const rawId = queryParams.get("Id");
   const Id = decodeURIComponent(rawId);
-  
+
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${config.API_URL}/app/user/getBrandCampaign`, {
-        params: { Id }
-      });
+      const response = await axios.get(
+        `${config.API_URL}/app/user/getBrandCampaign`,
+        {
+          params: { Id },
+        }
+      );
       setData(response.data.campaigndetails);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -30,40 +31,40 @@ function ViewCampaign() {
 
   const saveData = async () => {
     try {
-      // Sort the data by rank (ascending) and select the top 5
       const sortedData = data
-        .filter(item => item.rank !== undefined && item.rank !== '')
+        .filter((item) => item.rank !== undefined && item.rank !== "")
         .sort((a, b) => a.rank - b.rank)
         .slice(0, 5);
-  
-      const datamil = sortedData.map(item => ({
+
+      const datamil = sortedData.map((item) => ({
         userName: item.userName,
         contestName: item.campaign_name,
         rank: item.rank,
-        mobileNo:item.mobileNo
+        mobileNo: item.mobileNo,
       }));
-  
-      const Name = datamil[0]?.contestName || ''; // Use optional chaining to avoid errors if datamil is empty
-    
-  
-      // Construct the body object with a dynamic key in the data object
+
+      const Name = datamil[0]?.contestName || "";
+
       const body = {
         campaign: 1,
         Name: Name,
         data: {
-         "Array": datamil
-        }
+          Array: datamil,
+        },
       };
-  
-  
-      const response = await axios.post(`${config.API_URL}/app/user/saveresult`, body);
-  
+
+      const response = await axios.post(
+        `${config.API_URL}/app/user/saveresult`,
+        body
+      );
+
       if (response.status === 200) {
-      
-        await axios.post(`${config.API_URL}/app/user/send`, {
-          title:`Result is Out`,
-          body:`Campaign Result is Out.`
-        });
+        // await axios.post(`${config.API_URL}/app/user/send`, {
+        //   title:`Result is Out`,
+        //   body:`Campaign Result is Out.`
+        // });
+
+        alert("Result is Saved");
       }
     } catch (error) {
       console.error("Error saving data:", error);
@@ -95,12 +96,12 @@ function ViewCampaign() {
               <td>{item.userName}</td>
               <td>
                 <a
-                  href={`https://www.adoro.social/Campaign/${item.fileName}`}
+                  href={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/Campaign/${item.fileName}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img
-                    src={`https://www.adoro.social/Campaign/${item.fileName}`}
+                    src={`https://adoro-data-storage.s3.ap-south-1.amazonaws.com/Campaign/${item.fileName}`}
                     alt="Description"
                     style={{ height: 100, width: 100 }}
                   />
@@ -109,7 +110,7 @@ function ViewCampaign() {
               <td>
                 <input
                   type="number"
-                  value={item.rank || ''}
+                  value={item.rank || ""}
                   onChange={(e) => handleRankChange(index, e.target.value)}
                 />
               </td>
@@ -124,7 +125,9 @@ function ViewCampaign() {
           marginBottom: "10px",
         }}
       >
-        <button className="custom-btn" onClick={saveData}>Save</button>
+        <button className="custom-btn" onClick={saveData}>
+          Save
+        </button>
       </div>
     </div>
   );
